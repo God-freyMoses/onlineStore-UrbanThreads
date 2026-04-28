@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Account | Urban Threads</title>
+    <meta name="description" content="View your profile and order history." />
+    <meta property="og:title" content="My Account | Urban Threads" />
+    <meta property="og:description" content="View your profile and order history." />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div id="app-shell"></div>
+    <main class="container" id="page">
+      <section class="panel">
+        <div class="panel__header">
+          <div>
+            <h2>My account</h2>
+            <p class="muted">Profile, default shipping info, and your orders.</p>
+          </div>
+          <div class="panel__headerRight">
+            <a class="btn btn--secondary" href="/admin.html">Admin</a>
+          </div>
+        </div>
+
+        <div id="accountGate" class="callout" hidden>
+          <div class="callout__title">Sign in required</div>
+          <div class="callout__text">Sign in to view your account details and orders.</div>
+          <a id="accountGateLink" class="btn btn--primary" href="/auth.html">Sign in</a>
+        </div>
+
+        <div id="accountContent" hidden>
+          <div style="display:grid;grid-template-columns:320px 1fr;gap:16px" class="accountGrid">
+            <aside>
+              <div class="formCard">
+                <div style="font-weight:900">Profile</div>
+                <div class="muted">Signed in as</div>
+                <div id="acctEmail" class="mono">—</div>
+                <button id="acctSignOut" class="btn btn--secondary btn--full" type="button">Sign out</button>
+              </div>
+            </aside>
+            <section style="display:grid;gap:14px">
+              <div class="panel panel--soft">
+                <h3>Details</h3>
+                <form id="profileForm" class="formGrid" novalidate>
+                  <label class="field">
+                    <span class="field__label">Display name (optional)</span>
+                    <input class="input" name="displayName" type="text" />
+                  </label>
+                  <div></div>
+                  <button class="btn btn--primary" type="submit">Save profile</button>
+                  <div id="profileMessage" class="message" role="status" aria-live="polite"></div>
+                </form>
+              </div>
+
+              <div class="panel panel--soft">
+                <h3>Default shipping address</h3>
+                <form id="addressForm" class="formGrid" novalidate>
+                  <label class="field">
+                    <span class="field__label">Full name</span>
+                    <input class="input" name="fullName" type="text" />
+                  </label>
+                  <label class="field">
+                    <span class="field__label">Phone</span>
+                    <input class="input" name="phone" type="tel" />
+                  </label>
+                  <label class="field field--span2">
+                    <span class="field__label">Address line 1</span>
+                    <input class="input" name="line1" type="text" />
+                  </label>
+                  <label class="field field--span2">
+                    <span class="field__label">Address line 2</span>
+                    <input class="input" name="line2" type="text" />
+                  </label>
+                  <label class="field">
+                    <span class="field__label">City</span>
+                    <input class="input" name="city" type="text" />
+                  </label>
+                  <label class="field">
+                    <span class="field__label">State/Region</span>
+                    <input class="input" name="state" type="text" />
+                  </label>
+                  <label class="field">
+                    <span class="field__label">Postal code</span>
+                    <input class="input" name="postalCode" type="text" />
+                  </label>
+                  <label class="field">
+                    <span class="field__label">Country</span>
+                    <input class="input" name="country" type="text" />
+                  </label>
+                  <button class="btn btn--primary" type="submit">Save address</button>
+                  <div id="addressMessage" class="message" role="status" aria-live="polite"></div>
+                </form>
+              </div>
+
+              <div class="panel panel--soft">
+                <div class="panel__header" style="margin-bottom:10px">
+                  <div>
+                    <h3>Orders</h3>
+                    <p class="muted">Your most recent orders appear here.</p>
+                  </div>
+                </div>
+                <div id="ordersList" style="display:grid;gap:10px"></div>
+                <div id="ordersEmpty" class="empty" hidden>
+                  <h4>No orders yet</h4>
+                  <p class="muted">Once you place an order, it will show up here.</p>
+                  <a class="btn btn--secondary" href="/index.html#shop">Shop now</a>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="orderDialog" class="dialog">
+      <form method="dialog" class="dialog__panel">
+        <div class="dialog__header">
+          <div>
+            <div class="dialog__title">Order</div>
+            <div id="orderDialogMeta" class="muted">—</div>
+          </div>
+          <button class="iconBtn" value="cancel" aria-label="Close" type="submit">×</button>
+        </div>
+        <div id="orderDialogBody" class="dialog__body"></div>
+      </form>
+    </dialog>
+
+    <div id="toast-root" class="toastRoot" aria-live="polite" aria-relevant="additions"></div>
+    <script type="module" src="/js/pages/account.js"></script>
+  </body>
+</html>
+

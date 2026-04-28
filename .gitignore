@@ -1,0 +1,5 @@
+node_modules/
+FIREBASE_SETUP.md
+firestore.rules
+server.mjs
+.trae

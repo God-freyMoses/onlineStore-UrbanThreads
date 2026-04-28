@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product | Urban Threads</title>
+    <meta name="description" content="Details, sizes, and availability for Urban Threads products." />
+    <meta property="og:title" content="Product | Urban Threads" />
+    <meta property="og:description" content="Details, sizes, and availability for Urban Threads products." />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div id="app-shell"></div>
+    <main class="container" id="page">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a class="link" href="/index.html">Shop</a>
+        <span class="breadcrumbs__sep">/</span>
+        <span id="crumbCategory" class="muted">Product</span>
+        <span class="breadcrumbs__sep">/</span>
+        <span id="crumbTitle">Loading…</span>
+      </nav>
+
+      <section class="productLayout panel">
+        <div>
+          <div id="gallery" class="gallery" aria-busy="true"></div>
+        </div>
+        <div>
+          <div id="productPanel" class="productPanel" aria-busy="true"></div>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast-root" class="toastRoot" aria-live="polite" aria-relevant="additions"></div>
+    <script type="module" src="/js/pages/product.js"></script>
+  </body>
+</html>
+

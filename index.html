@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Urban Threads | Shop Streetwear &amp; Essentials</title>
+    <meta name="description" content="Browse the latest Urban Threads drops. Search, filter, and shop securely." />
+    <meta property="og:title" content="Urban Threads | Shop Streetwear &amp; Essentials" />
+    <meta property="og:description" content="Browse the latest Urban Threads drops. Search, filter, and shop securely." />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div id="app-shell"></div>
+
+    <main class="container" id="page">
+      <section class="hero">
+        <div class="hero__content">
+          <p class="badge">New Season</p>
+          <h1>Urban Threads</h1>
+          <p class="muted">Trendy streetwear for young adults — fast drops, clean fits.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#shop">Shop now</a>
+            <a class="btn btn--secondary" href="/account.html">My account</a>
+          </div>
+        </div>
+        <div class="hero__art" aria-hidden="true"></div>
+      </section>
+
+      <section id="shop" class="panel">
+        <div class="panel__header">
+          <div>
+            <h2>Shop</h2>
+            <p class="muted">Browse, filter, and sort the latest products.</p>
+          </div>
+          <div class="panel__headerRight">
+            <label class="field">
+              <span class="field__label">Search</span>
+              <input id="searchInput" class="input" type="search" placeholder="Hoodie, cargo, tee…" autocomplete="off" />
+            </label>
+          </div>
+        </div>
+
+        <div class="shopLayout">
+          <aside class="filters">
+            <div class="filters__card">
+              <label class="field">
+                <span class="field__label">Category</span>
+                <select id="categorySelect" class="select"></select>
+              </label>
+              <label class="field">
+                <span class="field__label">Sort</span>
+                <select id="sortSelect" class="select">
+                  <option value="newest">Newest</option>
+                  <option value="priceAsc">Price: Low → High</option>
+                  <option value="priceDesc">Price: High → Low</option>
+                </select>
+              </label>
+              <button id="clearFiltersBtn" class="btn btn--secondary btn--full" type="button">Clear filters</button>
+            </div>
+
+            <div class="callout">
+              <div class="callout__title">Firebase setup</div>
+              <div class="callout__text">Replace placeholders in <span class="mono">js/firebase.js</span> with your Firebase config.</div>
+              <a class="link" href="/admin.html">Go to admin</a>
+            </div>
+          </aside>
+
+          <section class="results">
+            <div id="statusBar" class="statusBar" aria-live="polite"></div>
+            <div id="productGrid" class="grid"></div>
+            <div id="emptyState" class="empty" hidden>
+              <h3>No products found</h3>
+              <p class="muted">Try clearing filters or checking your Firebase data.</p>
+              <button class="btn btn--secondary" id="emptyClearBtn" type="button">Clear filters</button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast-root" class="toastRoot" aria-live="polite" aria-relevant="additions"></div>
+    <script type="module" src="/js/pages/index.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Urban Threads</title>
+    <meta name="description" content="Manage products and orders." />
+    <meta property="og:title" content="Admin | Urban Threads" />
+    <meta property="og:description" content="Manage products and orders." />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div id="app-shell"></div>
+    <main class="container" id="page">
+      <section class="panel">
+        <div class="panel__header">
+          <div>
+            <h2>Admin</h2>
+            <p class="muted">Manage products and update order status.</p>
+          </div>
+          <div class="panel__headerRight">
+            <a class="btn btn--secondary" href="/account.html">Back to account</a>
+          </div>
+        </div>
+
+        <div id="adminGate" class="callout" hidden>
+          <div class="callout__title">Not authorized</div>
+          <div class="callout__text">Your account is not marked as an admin in Firestore.</div>
+          <div class="callout__text">Set <span class="mono">users/{uid}.isAdmin</span> to <span class="mono">true</span> to enable admin access.</div>
+          <div class="callout__text">Project: <span id="adminProjectId" class="mono"></span></div>
+          <div class="callout__text">Signed in as: <span id="adminEmail" class="mono"></span></div>
+          <div class="callout__text">UID: <span id="adminUid" class="mono"></span></div>
+          <div class="callout__text">Detected <span class="mono">isAdmin</span>: <span id="adminIsAdmin" class="mono"></span></div>
+          <button id="adminRecheckBtn" class="btn btn--secondary" type="button">Re-check</button>
+          <a class="btn btn--secondary" href="/index.html">Go to shop</a>
+        </div>
+
+        <div id="adminContent" hidden>
+          <div class="segmented" role="tablist" aria-label="Admin tabs">
+            <button id="tabProducts" class="segmented__tab is-active" role="tab" aria-selected="true" type="button">Products</button>
+            <button id="tabOrders" class="segmented__tab" role="tab" aria-selected="false" type="button">Orders</button>
+          </div>
+
+          <section id="productsPanel">
+            <div style="display:flex;gap:12px;align-items:flex-end;justify-content:space-between;margin:14px 0;flex-wrap:wrap">
+              <label class="field" style="min-width:280px;flex:1">
+                <span class="field__label">Search products</span>
+                <input id="productSearch" class="input" type="search" placeholder="Search by title or category…" />
+              </label>
+              <div style="display:flex;gap:10px">
+                <button id="newProductBtn" class="btn btn--secondary" type="button">New product</button>
+                <button id="seedBtn" class="btn btn--secondary" type="button">Seed demo products</button>
+                <button id="importFakeStoreBtn" class="btn btn--secondary" type="button">Import FakeStore</button>
+                <button id="repairImagesBtn" class="btn btn--secondary" type="button">Repair images</button>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1.3fr 0.7fr;gap:14px" class="adminGrid">
+              <div class="formCard" style="padding:0">
+                <table class="table" aria-label="Products">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th class="right">Price</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="productsTbody"></tbody>
+                </table>
+              </div>
+
+              <div class="formCard">
+                <h3 id="productFormTitle">Create product</h3>
+                <form id="productForm" class="authForm" novalidate>
+                  <label class="field">
+                    <span class="field__label">Title</span>
+                    <input class="input" name="title" type="text" required />
+                  </label>
+                  <label class="field">
+                    <span class="field__label">Category</span>
+                    <input class="input" name="category" type="text" required placeholder="Tops, Bottoms…" />
+                  </label>
+                  <label class="field">
+                    <span class="field__label">Price (USD)</span>
+                    <input class="input" name="price" type="number" min="0" step="0.01" required />
+                  </label>
+                  <label class="field">
+                    <span class="field__label">Description</span>
+                    <textarea class="textarea" name="description" rows="4" required></textarea>
+                  </label>
+
+                  <div class="panel panel--soft" style="padding:12px">
+                    <div style="font-weight:900;margin-bottom:10px">Images</div>
+                    <div id="imagesList" style="display:grid;gap:10px"></div>
+                    <button id="addImageBtn" class="btn btn--secondary" type="button">Add image URL</button>
+                  </div>
+
+                  <div class="panel panel--soft" style="padding:12px">
+                    <div style="font-weight:900;margin-bottom:10px">Variants</div>
+                    <div id="variantsList" style="display:grid;gap:10px"></div>
+                    <button id="addVariantBtn" class="btn btn--secondary" type="button">Add variant</button>
+                  </div>
+
+                  <label class="field field--row">
+                    <input id="isActive" class="checkbox" type="checkbox" name="isActive" checked />
+                    <span>Active</span>
+                  </label>
+
+                  <button id="saveProductBtn" class="btn btn--primary" type="submit">Save</button>
+                  <button id="deleteProductBtn" class="btn btn--danger" type="button" hidden>Archive</button>
+                  <div id="productMessage" class="message" role="status" aria-live="polite"></div>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          <section id="ordersPanel" hidden>
+            <div class="formCard" style="padding:0">
+              <table class="table" aria-label="Orders">
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>User</th>
+                    <th class="right">Total</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="ordersTbody"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="adminOrderDialog" class="dialog">
+      <form method="dialog" class="dialog__panel">
+        <div class="dialog__header">
+          <div>
+            <div class="dialog__title">Order</div>
+            <div id="adminOrderMeta" class="muted">—</div>
+          </div>
+          <button class="iconBtn" value="cancel" aria-label="Close" type="submit">×</button>
+        </div>
+        <div id="adminOrderBody" class="dialog__body"></div>
+      </form>
+    </dialog>
+
+    <div id="toast-root" class="toastRoot" aria-live="polite" aria-relevant="additions"></div>
+    <script type="module" src="/js/pages/admin.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "firebase": "^12.12.1"
+  }
+}

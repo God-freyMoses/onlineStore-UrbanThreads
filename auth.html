@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In | Urban Threads</title>
+    <meta name="description" content="Sign in or create an account to manage orders and checkout faster." />
+    <meta property="og:title" content="Sign In | Urban Threads" />
+    <meta property="og:description" content="Sign in or create an account to manage orders and checkout faster." />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div id="app-shell"></div>
+    <main class="container authWrap" id="page">
+      <section class="authCard panel">
+        <div style="margin-bottom:14px">
+          <h2 id="authTitle">Sign in</h2>
+          <p class="muted" id="authSubtitle">Welcome back. Continue to your account or checkout.</p>
+        </div>
+
+        <div class="segmented" role="tablist" aria-label="Auth mode">
+          <button id="tabLogin" class="segmented__tab is-active" role="tab" aria-selected="true" type="button">Login</button>
+          <button id="tabRegister" class="segmented__tab" role="tab" aria-selected="false" type="button">Register</button>
+        </div>
+
+        <form id="authForm" class="authForm" novalidate>
+          <label class="field">
+            <span class="field__label">Email</span>
+            <input class="input" name="email" type="email" required autocomplete="email" />
+          </label>
+          <label class="field">
+            <span class="field__label">Password</span>
+            <input class="input" name="password" type="password" required autocomplete="current-password" />
+          </label>
+          <label id="confirmField" class="field" hidden>
+            <span class="field__label">Confirm password</span>
+            <input class="input" name="confirmPassword" type="password" autocomplete="new-password" />
+            <span class="field__hint">Use at least 8 characters.</span>
+          </label>
+          <button id="authSubmit" class="btn btn--primary btn--full" type="submit">Sign in</button>
+          <button id="signOutBtn" class="btn btn--secondary btn--full" type="button" hidden>Sign out</button>
+          <div id="authMessage" class="message" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+    </main>
+
+    <div id="toast-root" class="toastRoot" aria-live="polite" aria-relevant="additions"></div>
+    <script type="module" src="/js/pages/auth.js"></script>
+  </body>
+</html>
+
