@@ -114,8 +114,7 @@ function render() {
     pill.textContent = v ? `In stock • ${v.size || v.sku || 'Variant'}` : 'Out of stock'
 
     const actions = document.createElement('div')
-    actions.style.display = 'flex'
-    actions.style.gap = '10px'
+    actions.className = 'card__actions'
     const view = document.createElement('a')
     view.className = 'btn btn--secondary'
     view.href = `/product.html?id=${encodeURIComponent(p.id)}`
@@ -158,7 +157,7 @@ function render() {
 async function loadProducts() {
   statusBar.textContent = 'Loading products…'
   if (!isFirebaseConfigured) {
-    statusBar.textContent = 'Firebase not configured. Update js/firebase.js with your config.'
+    statusBar.textContent = 'Store is temporarily unavailable.'
     emptyState.hidden = false
     return
   }
