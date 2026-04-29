@@ -2,14 +2,30 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.5/fireba
 import { getAuth } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js'
 import { initializeFirestore } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js'
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCuABuaZYAVO8Gm2seBn9WPwDCLONlCY34",
-  authDomain: "urban-threads-a34b3.firebaseapp.com",
-  projectId: "urban-threads-a34b3",
-  storageBucket: "urban-threads-a34b3.firebasestorage.app",
-  messagingSenderId: "7945800427",
-  appId: "1:7945800427:web:8a40bafe86a2cd23d78cae"
-};
+function readFirebaseConfig() {
+  const fromWindow = globalThis?.__FIREBASE_CONFIG__
+  if (fromWindow && typeof fromWindow === 'object') return fromWindow
+
+  try {
+    const raw = localStorage.getItem('ut_firebase_config')
+    if (!raw) return null
+    const parsed = JSON.parse(raw)
+    if (parsed && typeof parsed === 'object') return parsed
+  } catch {
+    return null
+  }
+  return null
+}
+
+const firebaseConfig =
+  readFirebaseConfig() || {
+    apiKey: 'YOUR_API_KEY',
+    authDomain: 'YOUR_PROJECT.firebaseapp.com',
+    projectId: 'YOUR_PROJECT_ID',
+    storageBucket: 'YOUR_PROJECT.appspot.com',
+    messagingSenderId: 'YOUR_SENDER_ID',
+    appId: 'YOUR_APP_ID',
+  }
 
 export const isFirebaseConfigured = Object.values(firebaseConfig).every((v) => {
   const s = String(v || '').trim()

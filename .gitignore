@@ -2,3 +2,4 @@ node_modules/
 FIREBASE_SETUP.md
 firestore.rules
 .trae
+js/runtime-config.generated.js

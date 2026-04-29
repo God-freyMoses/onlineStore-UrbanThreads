@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "build": "node netlify-build.mjs",
     "dev": "node server.mjs",
     "start": "node server.mjs"
   },
